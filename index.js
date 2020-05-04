@@ -62,6 +62,9 @@ function tickTimes(){
 function renderQuestions(){
     //get the users current question 
     var userIsOnQuestion = questions[currentQuestion];
+    if (currentQuestion >= questions.length){
+       return quizEnd();
+    }
 
     //update the title on the html with the current question title 
     var titleOnHtml = document.getElementById("question-title")
@@ -121,8 +124,12 @@ function nextQuestion(){
 function quizEnd() {
     clearInterval(theSeconds);
     var finalScoreEl = document.getElementById("final-score");
-    finalScoreEl.textContent = theTime;
+    finalScoreEl.innerHTML = "<h1>Your final score is: " + theTime + "</h1>" ;
     finalScoreEl.style.display = "block";
+    var timeAreaEl = document.getElementById("timeArea");
+    timeAreaEl.style.display = "none";
+    questionSector.setAttribute("class", "hide");
+
 }
 // end screen
 var endScreenSector = document.getElementById("end-screen");
